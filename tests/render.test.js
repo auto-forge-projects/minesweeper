@@ -19,10 +19,16 @@ test('mountBoard: creates one child per cell, in index order, sets grid-template
   assert.ok(el.children[0].classList.contains('hidden'));
 });
 
-test('render.js uses ONLY textContent/className/classList — no innerHTML-family calls (SEC-1)', async () => {
+test('SEC-1 (F3): no src/*.js file uses innerHTML/outerHTML-family DOM writes (=, +=, insertAdjacentHTML, ...)', async () => {
   const fs = await import('node:fs');
-  const src = fs.readFileSync(new URL('../src/render.js', import.meta.url), 'utf8');
-  assert.doesNotMatch(src, /\.innerHTML\s*=|\.outerHTML\s*=|insertAdjacentHTML\(|document\.write\(|eval\(|new Function\(/);
+  const dir = new URL('../src/', import.meta.url);
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith('.js'));
+  assert.ok(files.length > 0, 'expected at least one src/*.js file to scan');
+  const forbidden = /\.innerHTML\s*\+?=|\.outerHTML\s*\+?=|insertAdjacentHTML\(|document\.write\(|eval\(|new Function\(/;
+  for (const file of files) {
+    const src = fs.readFileSync(new URL(file, dir), 'utf8');
+    assert.doesNotMatch(src, forbidden, `${file} must not use innerHTML-family DOM writes`);
+  }
 });
 
 test('updateCells: only touches the given indices, leaves the rest untouched', () => {

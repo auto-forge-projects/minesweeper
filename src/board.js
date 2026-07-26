@@ -60,6 +60,7 @@ export function placeMines(board, safeIndex, rng = Math.random) {
     [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
   }
   const mineCount = Math.min(board.mines, candidates.length);
+  board.mines = mineCount; // F4 fix: keep the win-check's single source of truth in sync
   for (let k = 0; k < mineCount; k++) {
     board.cells[candidates[k]].mine = true;
   }
