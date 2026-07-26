@@ -1,20 +1,64 @@
 {
   "schema_version": 2,
-  "revision": 0,
+  "revision": 8,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
-  "repo_mode": "per-repo",
   "profile": "LITE",
-  "current_phase": null,
+  "current_phase": 0,
   "status": "pending",
   "active_agents": [],
-  "phases": {},
+  "phases": {
+    "0": {
+      "mode": "AUTOPILOT",
+      "status": "done",
+      "note": "Faz 0 (Fikir/Intake) üretildi (orchestrator inline, business-analyst rolü) — onaylı 0b brief girdi alındı",
+      "artifacts": [
+        "docs/00-refined-brief.md",
+        "docs/00-idea.md"
+      ],
+      "decisions": [
+        "DL-00-001"
+      ],
+      "completed_at": "2026-07-26T19:22:00.000Z",
+      "started_at": "2026-07-26T19:19:00.000Z",
+      "gate_passed": true
+    },
+    "active_agents": []
+  },
   "feedback_loops": [],
   "pending_human_review": [],
-  "history": [],
+  "history": [
+    {
+      "at": "2026-07-26T19:16:37.842Z",
+      "event": "mode_changed",
+      "detail": "AUTOPILOT (aktif+sonrası; fazlar: 0)"
+    },
+    {
+      "at": "2026-07-26T19:16:38.097Z",
+      "event": "profile_changed",
+      "detail": "LITE"
+    },
+    {
+      "at": "2026-07-26T19:18:43.429Z",
+      "event": "dl_missing",
+      "phase": "0",
+      "detail": "Faz 0 DL'siz kapatıldı — decisions/DL-00-*.md yok (kapı bunu düşürecek)"
+    }
+  ],
   "budget": {
     "model_calls": {},
-    "notes": ""
+    "notes": "",
+    "telemetry": [
+      {
+        "phase": "0",
+        "duration_s": 180,
+        "model": null,
+        "model_recommended": "haiku",
+        "gate_passed": true,
+        "at": "2026-07-26T19:22:00.000Z"
+      }
+    ]
   },
-  "updated_at": null
+  "updated_at": "2026-07-26T19:20:44.636Z",
+  "default_mode": "AUTOPILOT"
 }
