@@ -1,0 +1,12 @@
+{
+  "name": "minesweeper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Client-side static Minesweeper (vanilla JS, zero dependencies).",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
