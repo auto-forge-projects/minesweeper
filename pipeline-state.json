@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 10,
+  "revision": 12,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -23,7 +23,21 @@
       "started_at": "2026-07-26T19:19:00.000Z",
       "gate_passed": true
     },
-    "active_agents": []
+    "active_agents": [],
+    "1-2": {
+      "status": "done",
+      "mode": "AUTOPILOT",
+      "started_at": "2026-07-26T19:22:00.000Z",
+      "gate_passed": true,
+      "completed_at": "2026-07-26T19:23:00.000Z",
+      "artifacts": [
+        "docs/01-02-value-feasibility.md"
+      ],
+      "decisions": [
+        "DL-01-001"
+      ],
+      "note": "Değer & Fizibilite (LITE birleşik) — GO kararı"
+    }
   },
   "feedback_loops": [],
   "pending_human_review": [],
@@ -56,9 +70,17 @@
         "model_recommended": "haiku",
         "gate_passed": true,
         "at": "2026-07-26T19:22:00.000Z"
+      },
+      {
+        "phase": "1-2",
+        "duration_s": 60,
+        "model": null,
+        "model_recommended": "sonnet",
+        "gate_passed": true,
+        "at": "2026-07-26T19:23:00.000Z"
       }
     ]
   },
-  "updated_at": "2026-07-26T19:21:07.853Z",
+  "updated_at": "2026-07-26T19:22:13.262Z",
   "default_mode": "AUTOPILOT"
 }
