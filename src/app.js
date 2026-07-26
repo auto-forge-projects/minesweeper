@@ -28,8 +28,14 @@ export function initApp(root) {
 
   let board = null;
   let pressTimer = null;
+  // F1 fix: after a long-press flags a cell, the touch device still emits a
+  // synthetic `click` (and on some Android/Chrome builds, an extra native
+  // `contextmenu`) for the SAME gesture. Both must be swallowed once so they
+  // don't re-toggle/open the cell the finger already left.
+  let suppressNextClick = false;
 
   function newGame() {
+    clearPressTimer(); // F8 fix: a pending long-press must not flag a cell on the NEW board
     const key = resolveDifficultyKey(difficultySelect ? difficultySelect.value : 'easy');
     board = createBoard(key);
     mountBoard(boardEl, board);
@@ -60,11 +66,32 @@ export function initApp(root) {
   }
 
   boardEl.addEventListener('click', (evt) => {
+    if (suppressNextClick) {
+      // The emulated click for a gesture we already handled as a long-press
+      // flag — swallow it so it doesn't reveal the cell (F1).
+      suppressNextClick = false;
+      evt.preventDefault();
+      evt.stopPropagation();
+      return;
+    }
     handleReveal(indexFromEvent(evt));
   });
 
   boardEl.addEventListener('contextmenu', (evt) => {
     evt.preventDefault();
+    if (suppressNextClick) {
+      // Same gesture already toggled the flag via the long-press timer
+      // (Android/Chrome can fire a native contextmenu alongside it) — don't
+      // toggle a second time, just keep swallowing the trailing click (F1).
+      return;
+    }
+    if (pressTimer !== null) {
+      // Native contextmenu arrived before our JS timer fired — treat it as
+      // the long-press signal on this platform: toggle once, cancel the
+      // pending timer, and suppress the click that may still follow.
+      clearPressTimer();
+      suppressNextClick = true;
+    }
     handleFlag(indexFromEvent(evt));
   });
 
@@ -73,6 +100,7 @@ export function initApp(root) {
     clearPressTimer();
     pressTimer = setTimeout(() => {
       pressTimer = null;
+      suppressNextClick = true;
       handleFlag(i);
     }, LONG_PRESS_MS);
   });
