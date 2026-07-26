@@ -46,3 +46,79 @@ export function neighbors(board, i) {
   }
   return result;
 }
+
+// DL-05-003: tembel (lazy) mayın yerleşimi — `safeIndex` + komşuları asla mayınlı olamaz (NFR-4).
+// DL-04-001: Fisher-Yates shuffle.
+export function placeMines(board, safeIndex, rng = Math.random) {
+  const forbidden = new Set([safeIndex, ...neighbors(board, safeIndex)]);
+  const candidates = [];
+  for (let i = 0; i < board.cells.length; i++) {
+    if (!forbidden.has(i)) candidates.push(i);
+  }
+  for (let i = candidates.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+  }
+  const mineCount = Math.min(board.mines, candidates.length);
+  for (let k = 0; k < mineCount; k++) {
+    board.cells[candidates[k]].mine = true;
+  }
+  for (let i = 0; i < board.cells.length; i++) {
+    if (board.cells[i].mine) continue;
+    let count = 0;
+    for (const n of neighbors(board, i)) {
+      if (board.cells[n].mine) count++;
+    }
+    board.cells[i].adj = count;
+  }
+  board.status = 'playing';
+  return board;
+}
+
+// DL-04-002: iteratif yığın ile flood-fill (rekürsif DFS yerine — derin özyineleme riski yok).
+// DL-05-004: mutasyon fonksiyonları `changed[]` döndürür (render.js girdisi).
+export function revealCell(board, i, rng = Math.random) {
+  if (!isValidIndex(board, i)) return { changed: [], status: board.status };
+  if (board.status === 'won' || board.status === 'lost') return { changed: [], status: board.status };
+  const cell = board.cells[i];
+  if (cell.state !== 'hidden') return { changed: [], status: board.status };
+
+  if (board.status === 'ready') {
+    placeMines(board, i, rng);
+  }
+
+  const changed = [];
+
+  if (board.cells[i].mine) {
+    for (let idx = 0; idx < board.cells.length; idx++) {
+      if (board.cells[idx].mine && board.cells[idx].state !== 'revealed') {
+        board.cells[idx].state = 'revealed';
+        changed.push(idx);
+      }
+    }
+    board.cells[i].triggered = true;
+    board.status = 'lost';
+    return { changed, status: board.status };
+  }
+
+  const stack = [i];
+  while (stack.length) {
+    const idx = stack.pop();
+    const c = board.cells[idx];
+    if (c.state !== 'hidden') continue;
+    c.state = 'revealed';
+    board.revealedCount++;
+    changed.push(idx);
+    if (c.adj === 0) {
+      for (const n of neighbors(board, idx)) {
+        if (board.cells[n].state === 'hidden') stack.push(n);
+      }
+    }
+  }
+
+  const nonMineCells = board.cells.length - board.mines;
+  if (board.revealedCount >= nonMineCells) {
+    board.status = 'won';
+  }
+  return { changed, status: board.status };
+}
