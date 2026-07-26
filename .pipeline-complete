@@ -1,0 +1,3 @@
+AutoForge pipeline tamamlandı: 2026-07-26T20:20:32Z
+17 fazın tamamı (0b, 0, 1-2, 3, 4-5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) kapandı.
+Bu işaretten sonra CI susturması ([skip ci]) kalkar; commit'ler normal şekilde Actions'ı tetikler.

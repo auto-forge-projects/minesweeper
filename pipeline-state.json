@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
-  "revision": 92,
+  "revision": 95,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
-  "current_phase": 9,
-  "status": "pending",
+  "current_phase": 16,
+  "status": "completed",
   "active_agents": [],
   "phases": {
     "0": {
@@ -271,6 +271,20 @@
       ],
       "note": "Bakim (devops-engineer rolu, inline) - 11 TD (PR-1/PR-2 bulgulari onceliklendirildi)"
     },
+    "16": {
+      "status": "done",
+      "mode": "AUTOPILOT",
+      "started_at": "2026-07-26T20:30:00.000Z",
+      "gate_passed": true,
+      "completed_at": "2026-07-26T20:32:00.000Z",
+      "artifacts": [
+        "docs/16-retro.md"
+      ],
+      "decisions": [
+        "DL-16-001"
+      ],
+      "note": "Retrospektif (orchestrator, inline) - AF-108 kaydedildi, 2 oneri uretildi"
+    },
     "active_agents": [],
     "1-2": {
       "status": "done",
@@ -445,10 +459,18 @@
         "model_recommended": "haiku",
         "gate_passed": true,
         "at": "2026-07-26T20:28:00.000Z"
+      },
+      {
+        "phase": "16",
+        "duration_s": 120,
+        "model": null,
+        "model_recommended": "sonnet",
+        "gate_passed": true,
+        "at": "2026-07-26T20:32:00.000Z"
       }
     ]
   },
-  "updated_at": "2026-07-26T20:18:15.187Z",
+  "updated_at": "2026-07-26T20:20:43.729Z",
   "default_mode": "AUTOPILOT",
   "product": {
     "type": "web",
