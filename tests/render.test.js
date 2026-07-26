@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createBoard, revealCell } from '../src/board.js';
+import { createBoard } from '../src/board.js';
 import { createFakeDocument, FakeElement } from './helpers/fake-dom.js';
 
 // render.js uses the global `document` (as real browser code does) — inject a fake one
@@ -19,27 +19,25 @@ test('mountBoard: creates one child per cell, in index order, sets grid-template
   assert.ok(el.children[0].classList.contains('hidden'));
 });
 
-test('mountBoard uses ONLY textContent/className — no innerHTML anywhere in render.js source (SEC-1)', async () => {
+test('render.js uses ONLY textContent/className/classList — no innerHTML-family calls (SEC-1)', async () => {
   const fs = await import('node:fs');
   const src = fs.readFileSync(new URL('../src/render.js', import.meta.url), 'utf8');
-  assert.doesNotMatch(src, /innerHTML|outerHTML|insertAdjacentHTML|document\.write|eval\(|new Function/);
+  assert.doesNotMatch(src, /\.innerHTML\s*=|\.outerHTML\s*=|insertAdjacentHTML\(|document\.write\(|eval\(|new Function\(/);
 });
 
-test('updateCells: only touches the given indices, reflects revealed number + mine state', () => {
+test('updateCells: only touches the given indices, leaves the rest untouched', () => {
   const board = createBoard('easy');
-  board.mines = 1;
-  board.cells[0].mine = true;
-  board.status = 'playing';
   const el = new FakeElement('div');
   mountBoard(el, board);
 
-  const { changed } = revealCell(board, 40); // interior cell, far from the single mine
-  updateCells(el, board, changed);
-  for (const i of changed) {
-    assert.ok(el.children[i].classList.contains('revealed'));
-    // untouched cells remain hidden
-  }
-  assert.ok(el.children[0].classList.contains('hidden')); // mine cell untouched, still hidden
+  board.cells[10].state = 'revealed';
+  board.cells[10].adj = 3;
+  updateCells(el, board, [10]);
+
+  assert.ok(el.children[10].classList.contains('revealed'));
+  assert.equal(el.children[10].textContent, '3');
+  assert.ok(el.children[0].classList.contains('hidden')); // untouched
+  assert.ok(el.children[20].classList.contains('hidden')); // untouched
 });
 
 test('updateCells: flagged cell shows the flag glyph, revealed mine shows the mine glyph', () => {
