@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Client-side static Minesweeper (vanilla JS, zero dependencies).",
   "scripts": {
-    "test": "node --test tests/"
+    "test": "node --test"
   },
   "dependencies": {},
   "devDependencies": {}

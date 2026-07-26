@@ -45,11 +45,12 @@ test('neighbors: interior cell has 8 neighbors', () => {
   assert.equal(neighbors(board, 10).length, 8);
 });
 
-test('neighbors: row wraparound is forbidden (right-edge cell excludes next-row col 0)', () => {
-  const board = createBoard('easy'); // cols=9, index 8 = row0 col8 (right edge)
-  const ns = neighbors(board, 8);
-  assert.ok(!ns.includes(9)); // col0 of next row must NOT be a neighbor
+test('neighbors: row wraparound is forbidden (right-edge, mid-row cell has 5 neighbors, no crossover)', () => {
+  const board = createBoard('easy'); // cols=9; index 17 = row1 col8 (right edge, non-corner)
+  const ns = neighbors(board, 17);
   assert.equal(ns.length, 5);
+  assert.ok(!ns.includes(9)); // row1 col0 must NOT be treated as a neighbor of row1 col8
+  assert.ok(!ns.includes(18)); // row2 col0 must NOT be treated as a neighbor either
 });
 
 test('neighbors: out-of-range/invalid index returns empty array, no throw (SEC-2)', () => {
