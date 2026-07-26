@@ -60,7 +60,7 @@ test('initApp: flagged cell does not open on click (FR-2)', () => {
 });
 
 test('initApp: long touch (~500ms) toggles a flag; short touch does not (FR-3)', (t) => {
-  t.mock.timers.enable({ apis: ['setTimeout', 'clearTimeout'] });
+  t.mock.timers.enable({ apis: ['setTimeout'] });
   const { root, board } = buildRoot();
   initApp(root);
 
