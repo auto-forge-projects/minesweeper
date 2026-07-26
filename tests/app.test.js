@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createFakeDocument, FakeElement, FakeEvent } from './helpers/fake-dom.js';
+import { createFakeDocument, FakeElement, FakeEvent, dispatchTouchTap } from './helpers/fake-dom.js';
 
 globalThis.document = createFakeDocument();
 const { initApp } = await import('../src/app.js');
@@ -75,6 +75,43 @@ test('initApp: long touch (~500ms) toggles a flag; short touch does not (FR-3)',
   board.dispatchEvent(new FakeEvent('touchstart', { target: longCell }));
   t.mock.timers.tick(500);
   assert.ok(longCell.classList.contains('flagged'));
+});
+
+test('F1 regression: long-press flags a cell; the browser-emulated click that follows must NOT open it', (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const { root, board } = buildRoot();
+  initApp(root);
+  const cell = board.children[7];
+
+  const clickEvt = dispatchTouchTap(board, cell, { holdMs: 500, tick: (ms) => t.mock.timers.tick(ms) });
+
+  assert.ok(cell.classList.contains('flagged'));
+  assert.ok(!cell.classList.contains('revealed'));
+  assert.ok(clickEvt.defaultPrevented);
+});
+
+test('F1 regression: short touch tap (no long-press) reveals the cell normally, not a flag', (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const { root, board } = buildRoot();
+  initApp(root);
+  const cell = board.children[9];
+
+  dispatchTouchTap(board, cell, { holdMs: 200, tick: (ms) => t.mock.timers.tick(ms) });
+
+  assert.ok(cell.classList.contains('revealed'));
+  assert.ok(!cell.classList.contains('flagged'));
+});
+
+test('F1 regression: Android-style contextmenu firing alongside the long-press timer toggles the flag only once', (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const { root, board } = buildRoot();
+  initApp(root);
+  const cell = board.children[11];
+
+  dispatchTouchTap(board, cell, { holdMs: 500, tick: (ms) => t.mock.timers.tick(ms), onContextMenu: true });
+
+  assert.ok(cell.classList.contains('flagged'));
+  assert.ok(!cell.classList.contains('revealed'));
 });
 
 test('initApp: changing difficulty starts a fresh board of the new size (FR-1/FR-6)', () => {

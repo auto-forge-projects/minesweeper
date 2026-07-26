@@ -107,3 +107,22 @@ export function createFakeDocument() {
     createElement: (tag) => new FakeElement(tag),
   };
 }
+
+// Simulates a real touch device's compatibility-event sequence: touchstart,
+// (optional hold via `tick`), touchend, then the browser-synthesized `click`
+// that follows every touch tap (used to reproduce/guard against F1: the
+// touch->click emulation race between long-press flagging and cell reveal).
+// `onContextMenu: true` additionally fires a native `contextmenu` right after
+// touchstart, before the hold completes — some Android/Chrome builds emit it
+// alongside (not instead of) the JS long-press timer.
+export function dispatchTouchTap(container, target, { holdMs = 0, tick, onContextMenu = false } = {}) {
+  container.dispatchEvent(new FakeEvent('touchstart', { target }));
+  if (onContextMenu) {
+    container.dispatchEvent(new FakeEvent('contextmenu', { target }));
+  }
+  if (holdMs > 0 && tick) tick(holdMs);
+  container.dispatchEvent(new FakeEvent('touchend', { target }));
+  const clickEvt = new FakeEvent('click', { target });
+  container.dispatchEvent(clickEvt);
+  return clickEvt;
+}
