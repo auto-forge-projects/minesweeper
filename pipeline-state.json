@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 26,
+  "revision": 29,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -99,6 +99,20 @@
       ],
       "note": "Guvenlik Tasarimi (security-reviewer devri) - istemci-tarafi guven siniri kabul edilen risk, SEC-1..9 Faz 9 ve 12ye devredildi"
     },
+    "8": {
+      "status": "done",
+      "mode": "AUTOPILOT",
+      "started_at": "2026-07-26T19:37:30.000Z",
+      "gate_passed": true,
+      "completed_at": "2026-07-26T19:40:00.000Z",
+      "artifacts": [
+        "docs/08-plan.md"
+      ],
+      "decisions": [
+        "DL-08-001"
+      ],
+      "note": "Planlama (business-analyst rolu, inline) - mimari modullere hizali 8 task, cevrimsiz bagimlilik grafi"
+    },
     "active_agents": [],
     "1-2": {
       "status": "done",
@@ -194,10 +208,18 @@
         "model_recommended": "opus",
         "gate_passed": true,
         "at": "2026-07-26T19:37:00.000Z"
+      },
+      {
+        "phase": "8",
+        "duration_s": 150,
+        "model": null,
+        "model_recommended": "sonnet",
+        "gate_passed": true,
+        "at": "2026-07-26T19:40:00.000Z"
       }
     ]
   },
-  "updated_at": "2026-07-26T19:35:13.029Z",
+  "updated_at": "2026-07-26T19:36:31.166Z",
   "default_mode": "AUTOPILOT",
   "product": {
     "type": "web",
