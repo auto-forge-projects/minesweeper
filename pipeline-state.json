@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 88,
+  "revision": 91,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -257,6 +257,20 @@
       ],
       "note": "Monitoring (devops-engineer rolu, inline) - health probe + hata gorunurlugu, APM yok"
     },
+    "15": {
+      "status": "done",
+      "mode": "AUTOPILOT",
+      "started_at": "2026-07-26T20:25:00.000Z",
+      "gate_passed": true,
+      "completed_at": "2026-07-26T20:28:00.000Z",
+      "artifacts": [
+        "docs/15-maintenance.md"
+      ],
+      "decisions": [
+        "DL-15-001"
+      ],
+      "note": "Bakim (devops-engineer rolu, inline) - 11 TD (PR-1/PR-2 bulgulari onceliklendirildi)"
+    },
     "active_agents": [],
     "1-2": {
       "status": "done",
@@ -423,10 +437,18 @@
         "model_recommended": "sonnet",
         "gate_passed": true,
         "at": "2026-07-26T20:24:00.000Z"
+      },
+      {
+        "phase": "15",
+        "duration_s": 180,
+        "model": null,
+        "model_recommended": "haiku",
+        "gate_passed": true,
+        "at": "2026-07-26T20:28:00.000Z"
       }
     ]
   },
-  "updated_at": "2026-07-26T20:16:50.935Z",
+  "updated_at": "2026-07-26T20:18:14.915Z",
   "default_mode": "AUTOPILOT",
   "product": {
     "type": "web",
