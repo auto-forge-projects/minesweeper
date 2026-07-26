@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 64,
+  "revision": 68,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -158,6 +158,32 @@
       ],
       "note": "TDD ile board/render/app tamamlandi, 39/39 test yesil, sifir bagimlilik"
     },
+    "10": {
+      "status": "gate_failed",
+      "mode": "AUTOPILOT",
+      "started_at": "2026-07-26T19:52:00.000Z",
+      "gate_passed": false,
+      "artifacts": [
+        "docs/10-review/PR-1.md"
+      ],
+      "decisions": [
+        "DL-10-001"
+      ],
+      "note": "Blind review - Critical F1 (touch/mouse race condition, FR-3/NFR-3), Major F2 (test gap). Kapi KALDI.",
+      "review_cycles": [
+        {
+          "cycle": 1,
+          "severity_breakdown": {
+            "blocker": 0,
+            "critical": 1,
+            "major": 1,
+            "minor": 9,
+            "nit": 3
+          },
+          "result": "fail"
+        }
+      ]
+    },
     "active_agents": [],
     "1-2": {
       "status": "done",
@@ -174,7 +200,14 @@
       "note": "Değer & Fizibilite (LITE birleşik) — GO kararı"
     }
   },
-  "feedback_loops": [],
+  "feedback_loops": [
+    {
+      "from": "10",
+      "to": 9,
+      "reason": "Critical F1 (touch/mouse race: uzun-basma bayrak + emule click ayni hucreyi acar), Major F2 (fake DOM test bosluğu F1i test edemiyor)",
+      "at": "2026-07-26T19:58:45.000Z"
+    }
+  ],
   "pending_human_review": [],
   "history": [
     {
@@ -272,7 +305,7 @@
       }
     ]
   },
-  "updated_at": "2026-07-26T19:50:17.782Z",
+  "updated_at": "2026-07-26T19:58:36.228Z",
   "default_mode": "AUTOPILOT",
   "product": {
     "type": "web",
