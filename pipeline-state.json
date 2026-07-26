@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 80,
+  "revision": 81,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -382,7 +382,7 @@
       }
     ]
   },
-  "updated_at": "2026-07-26T20:14:53.697Z",
+  "updated_at": "2026-07-26T20:14:53.946Z",
   "default_mode": "AUTOPILOT",
   "product": {
     "type": "web",
