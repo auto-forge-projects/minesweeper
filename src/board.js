@@ -122,3 +122,23 @@ export function revealCell(board, i, rng = Math.random) {
   }
   return { changed, status: board.status };
 }
+
+// FR-3: yalnız hidden<->flagged geçer; won/lost (kilitli tahta) veya revealed etkisizdir.
+export function toggleFlag(board, i) {
+  const flagsLeft = () => board.mines - board.flagCount;
+  if (!isValidIndex(board, i)) return { changed: [], flagsLeft: flagsLeft() };
+  if (board.status === 'won' || board.status === 'lost') return { changed: [], flagsLeft: flagsLeft() };
+
+  const cell = board.cells[i];
+  if (cell.state === 'hidden') {
+    cell.state = 'flagged';
+    board.flagCount++;
+    return { changed: [i], flagsLeft: flagsLeft() };
+  }
+  if (cell.state === 'flagged') {
+    cell.state = 'hidden';
+    board.flagCount--;
+    return { changed: [i], flagsLeft: flagsLeft() };
+  }
+  return { changed: [], flagsLeft: flagsLeft() };
+}
