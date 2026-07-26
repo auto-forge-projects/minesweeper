@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 68,
+  "revision": 73,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -116,7 +116,7 @@
     "9": {
       "status": "done",
       "mode": "AUTOPILOT",
-      "started_at": "2026-07-26T19:41:00.000Z",
+      "started_at": "2026-07-26T19:58:44.985Z",
       "tasks": [
         {
           "title": "TASK-001 board.js core (test+impl, 2 commit)",
@@ -152,24 +152,26 @@
         }
       ],
       "gate_passed": true,
-      "completed_at": "2026-07-26T19:51:00.000Z",
+      "completed_at": "2026-07-26T20:02:00.000Z",
       "decisions": [
         "DL-09-001"
       ],
-      "note": "TDD ile board/render/app tamamlandi, 39/39 test yesil, sifir bagimlilik"
+      "note": "Faz 10 geri besleme delta-fix: F1(Critical)+F2(Major)+F3/F4/F8(Minor) duzeltildi, 42/42 test yesil"
     },
     "10": {
-      "status": "gate_failed",
+      "status": "done",
       "mode": "AUTOPILOT",
-      "started_at": "2026-07-26T19:52:00.000Z",
-      "gate_passed": false,
+      "started_at": "2026-07-26T20:02:11.975Z",
+      "gate_passed": true,
       "artifacts": [
-        "docs/10-review/PR-1.md"
+        "docs/10-review/PR-1.md",
+        "docs/10-review/PR-2.md"
       ],
       "decisions": [
-        "DL-10-001"
+        "DL-10-001",
+        "DL-10-002"
       ],
-      "note": "Blind review - Critical F1 (touch/mouse race condition, FR-3/NFR-3), Major F2 (test gap). Kapi KALDI.",
+      "note": "Re-review (cycle 2) GECTI - F1/F2/F3/F4/F8 cozuldu, Critical=0. F15-17 Faz 11/15e devredildi.",
       "review_cycles": [
         {
           "cycle": 1,
@@ -181,8 +183,20 @@
             "nit": 3
           },
           "result": "fail"
+        },
+        {
+          "cycle": 2,
+          "severity_breakdown": {
+            "blocker": 0,
+            "critical": 0,
+            "major": 1,
+            "minor": 1,
+            "nit": 1
+          },
+          "result": "pass"
         }
-      ]
+      ],
+      "completed_at": "2026-07-26T20:06:00.000Z"
     },
     "active_agents": [],
     "1-2": {
@@ -302,10 +316,26 @@
         "model_recommended": "sonnet",
         "gate_passed": true,
         "at": "2026-07-26T19:51:00.000Z"
+      },
+      {
+        "phase": "9",
+        "duration_s": 195,
+        "model": null,
+        "model_recommended": "sonnet",
+        "gate_passed": true,
+        "at": "2026-07-26T20:02:00.000Z"
+      },
+      {
+        "phase": "10",
+        "duration_s": 228,
+        "model": null,
+        "model_recommended": "opus",
+        "gate_passed": true,
+        "at": "2026-07-26T20:06:00.000Z"
       }
     ]
   },
-  "updated_at": "2026-07-26T19:58:36.228Z",
+  "updated_at": "2026-07-26T20:07:58.179Z",
   "default_mode": "AUTOPILOT",
   "product": {
     "type": "web",
