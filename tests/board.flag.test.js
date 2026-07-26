@@ -57,10 +57,23 @@ test('win: NOT triggered while at least one non-mine cell remains hidden', () =>
   board.mines = 1;
   board.cells[0].mine = true;
   board.status = 'playing';
-  for (let i = 1; i < board.cells.length - 1; i++) {
-    revealCell(board, i);
+  // Directly stage the board so exactly two non-mine cells remain hidden, each with a
+  // forced non-zero adjacency (so revealing one never flood-cascades into the other) —
+  // this isolates the win-check boundary from flood-fill behavior already covered elsewhere.
+  const lastTwo = [board.cells.length - 1, board.cells.length - 2];
+  for (let i = 1; i < board.cells.length; i++) {
+    if (!lastTwo.includes(i)) board.cells[i].state = 'revealed';
   }
-  assert.notEqual(board.status, 'won');
+  board.revealedCount = board.cells.length - 1 - lastTwo.length;
+  board.cells[lastTwo[0]].adj = 1;
+  board.cells[lastTwo[1]].adj = 1;
+
+  const result1 = revealCell(board, lastTwo[0]);
+  assert.notEqual(result1.status, 'won');
+  assert.equal(board.status, 'playing');
+
+  const result2 = revealCell(board, lastTwo[1]);
+  assert.equal(result2.status, 'won');
 });
 
 test('lost: locks the board — further revealCell/toggleFlag calls are no-ops', () => {
