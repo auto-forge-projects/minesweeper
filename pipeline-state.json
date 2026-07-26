@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 22,
+  "revision": 25,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -84,6 +84,20 @@
         "DL-06-001"
       ],
       "note": "UI/UX (developer rolü, inline) — zorluk seçici + tek grid + durum satırı, klavye v1 dışı"
+    },
+    "7": {
+      "status": "done",
+      "mode": "AUTOPILOT",
+      "started_at": "2026-07-26T19:33:30.000Z",
+      "gate_passed": true,
+      "completed_at": "2026-07-26T19:37:00.000Z",
+      "artifacts": [
+        "docs/07-security.md"
+      ],
+      "decisions": [
+        "DL-07-001"
+      ],
+      "note": "Guvenlik Tasarimi (security-reviewer devri) - istemci-tarafi guven siniri kabul edilen risk, SEC-1..9 Faz 9 ve 12ye devredildi"
     },
     "active_agents": [],
     "1-2": {
@@ -172,10 +186,18 @@
         "model_recommended": "sonnet",
         "gate_passed": true,
         "at": "2026-07-26T19:33:00.000Z"
+      },
+      {
+        "phase": "7",
+        "duration_s": 210,
+        "model": null,
+        "model_recommended": "opus",
+        "gate_passed": true,
+        "at": "2026-07-26T19:37:00.000Z"
       }
     ]
   },
-  "updated_at": "2026-07-26T19:30:17.863Z",
+  "updated_at": "2026-07-26T19:35:12.699Z",
   "default_mode": "AUTOPILOT",
   "product": {
     "type": "web",
