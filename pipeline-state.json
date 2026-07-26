@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 19,
+  "revision": 22,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -70,6 +70,20 @@
         "DL-05-004"
       ],
       "note": "Mimari Tasarım (architect devri) — board/render/app modülleri, tembel yerleşim + durum makinesi, changed[] sözleşmesi"
+    },
+    "6": {
+      "status": "done",
+      "mode": "AUTOPILOT",
+      "gate_passed": true,
+      "started_at": "2026-07-26T19:26:30.000Z",
+      "completed_at": "2026-07-26T19:33:00.000Z",
+      "artifacts": [
+        "docs/06-uiux/06-uiux.md"
+      ],
+      "decisions": [
+        "DL-06-001"
+      ],
+      "note": "UI/UX (developer rolü, inline) — zorluk seçici + tek grid + durum satırı, klavye v1 dışı"
     },
     "active_agents": [],
     "1-2": {
@@ -150,9 +164,21 @@
         "model_recommended": "opus",
         "gate_passed": true,
         "at": "2026-07-26T19:31:00.000Z"
+      },
+      {
+        "phase": "6",
+        "duration_s": 390,
+        "model": null,
+        "model_recommended": "sonnet",
+        "gate_passed": true,
+        "at": "2026-07-26T19:33:00.000Z"
       }
     ]
   },
-  "updated_at": "2026-07-26T19:29:05.963Z",
-  "default_mode": "AUTOPILOT"
+  "updated_at": "2026-07-26T19:30:17.863Z",
+  "default_mode": "AUTOPILOT",
+  "product": {
+    "type": "web",
+    "name": "minesweeper"
+  }
 }
