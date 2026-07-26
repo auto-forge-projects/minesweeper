@@ -92,3 +92,10 @@ export function initApp(root) {
 
   return { newGame };
 }
+
+// Tarayıcıda otomatik başlat. `document.body` yalnız gerçek bir DOM'da bulunur —
+// testlerdeki minimal fake `document` (yalnız createElement) bunu taşımaz, bu yüzden
+// import edildiğinde testlerde YAN ETKİSİZ kalır (SEC-4: tek girdi kanalı #board olayları).
+if (typeof document !== 'undefined' && document.body) {
+  initApp(document.body);
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" />
+<meta name="referrer" content="no-referrer" />
+<title>Mayın Tarlası</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<noscript>Bu oyun JavaScript gerektirir.</noscript>
+
+<h1>Mayın Tarlası</h1>
+
+<div class="controls">
+  <label for="difficulty">Zorluk</label>
+  <select id="difficulty">
+    <option value="easy">Kolay (9x9, 10 mayın)</option>
+    <option value="medium">Orta (16x16, 40 mayın)</option>
+    <option value="hard">Zor (16x30, 99 mayın)</option>
+  </select>
+  <button id="new-game" type="button">Yeni Oyun</button>
+</div>
+
+<div role="grid" id="board"></div>
+
+<div id="status" aria-live="polite"></div>
+
+<script type="module" src="src/app.js"></script>
+</body>
+</html>

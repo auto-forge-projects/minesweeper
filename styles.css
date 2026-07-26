@@ -1,0 +1,85 @@
+:root {
+  color-scheme: light;
+  --hidden-bg: #c9c9c9;
+  --revealed-bg: #f2f2f2;
+  --border: #9a9a9a;
+  --mine-bg: #e57373;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.controls select,
+.controls button {
+  font-size: 1rem;
+  padding: 0.4rem 0.6rem;
+}
+
+#board {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 100%;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.cell {
+  width: clamp(16px, 3.2vw, 28px);
+  height: clamp(16px, 3.2vw, 28px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(10px, 1.8vw, 14px);
+  user-select: none;
+  background: var(--hidden-bg);
+}
+
+.cell.revealed {
+  background: var(--revealed-bg);
+}
+
+.cell.flagged {
+  background: var(--hidden-bg);
+}
+
+.cell.mine {
+  background: var(--mine-bg);
+}
+
+.cell.mine-triggered {
+  background: #c62828;
+  color: #fff;
+}
+
+#status {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  min-height: 1.5em;
+}
