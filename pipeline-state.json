@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 81,
+  "revision": 84,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -229,6 +229,20 @@
       ],
       "note": "CI/CD (devops-engineer rolu, inline) - Dockerfile+nginx.conf eklendi, docker build dogrulandi, ci.yml npm test calistiriyor"
     },
+    "13": {
+      "status": "done",
+      "mode": "AUTOPILOT",
+      "started_at": "2026-07-26T20:17:00.000Z",
+      "gate_passed": true,
+      "completed_at": "2026-07-26T20:20:00.000Z",
+      "artifacts": [
+        "docs/13-release-notes.md"
+      ],
+      "decisions": [
+        "DL-13-001"
+      ],
+      "note": "Release (devops-engineer rolu, inline) - v0.1.0, rollback plani"
+    },
     "active_agents": [],
     "1-2": {
       "status": "done",
@@ -379,10 +393,18 @@
         "model_recommended": "sonnet",
         "gate_passed": true,
         "at": "2026-07-26T20:16:00.000Z"
+      },
+      {
+        "phase": "13",
+        "duration_s": 180,
+        "model": null,
+        "model_recommended": "haiku",
+        "gate_passed": true,
+        "at": "2026-07-26T20:20:00.000Z"
       }
     ]
   },
-  "updated_at": "2026-07-26T20:14:53.946Z",
+  "updated_at": "2026-07-26T20:16:03.899Z",
   "default_mode": "AUTOPILOT",
   "product": {
     "type": "web",
