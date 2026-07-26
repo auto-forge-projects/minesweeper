@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "revision": 16,
+  "revision": 19,
   "project": "minesweeper",
   "workspace": "workspace/minesweeper",
   "profile": "LITE",
@@ -36,6 +36,40 @@
         "DL-03-001"
       ],
       "note": "Requirement Analizi — 6 FR + 4 NFR"
+    },
+    "4": {
+      "status": "done",
+      "mode": "AUTOPILOT",
+      "started_at": "2026-07-26T19:26:00.000Z",
+      "gate_passed": true,
+      "completed_at": "2026-07-26T19:31:00.000Z",
+      "artifacts": [
+        "docs/04-solution-analysis.md"
+      ],
+      "decisions": [
+        "DL-04-001",
+        "DL-04-002",
+        "DL-04-003",
+        "DL-04-004"
+      ],
+      "note": "Çözüm Analizi (architect devri) — Fisher-Yates yasak-küme, iteratif flood-fill, hedefli render, 1D state"
+    },
+    "5": {
+      "status": "done",
+      "mode": "AUTOPILOT",
+      "started_at": "2026-07-26T19:26:00.000Z",
+      "gate_passed": true,
+      "completed_at": "2026-07-26T19:31:00.000Z",
+      "artifacts": [
+        "docs/05-architecture.md"
+      ],
+      "decisions": [
+        "DL-05-001",
+        "DL-05-002",
+        "DL-05-003",
+        "DL-05-004"
+      ],
+      "note": "Mimari Tasarım (architect devri) — board/render/app modülleri, tembel yerleşim + durum makinesi, changed[] sözleşmesi"
     },
     "active_agents": [],
     "1-2": {
@@ -100,9 +134,25 @@
         "model_recommended": "sonnet",
         "gate_passed": true,
         "at": "2026-07-26T19:25:00.000Z"
+      },
+      {
+        "phase": "4",
+        "duration_s": 300,
+        "model": null,
+        "model_recommended": "opus",
+        "gate_passed": true,
+        "at": "2026-07-26T19:31:00.000Z"
+      },
+      {
+        "phase": "5",
+        "duration_s": 300,
+        "model": null,
+        "model_recommended": "opus",
+        "gate_passed": true,
+        "at": "2026-07-26T19:31:00.000Z"
       }
     ]
   },
-  "updated_at": "2026-07-26T19:23:35.817Z",
+  "updated_at": "2026-07-26T19:29:05.963Z",
   "default_mode": "AUTOPILOT"
 }
